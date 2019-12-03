@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+            <div class="col-sm-5 mx-auto mt-5 text-center">
+            <div class="card bg-light"> 
+                <div class="card-header">Add-User</div>       
+                <div class="card-body">
+                    <form (ngSubmit)="onSubmit()">  <!--[formGroup]="profileForm"-->
+                    <div class="row">
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" [(ngModel)]="user.name" name="name" class="form-control">
+                        </div>
+                        </div>
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" [(ngModel)]="user.email" name="email" class="form-control">
+                        </div>
+                        </div>
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" [(ngModel)]="user.password" name="password" class="form-control">
+                        </div>
+                       </div>
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password &nbsp;</label>
+                            <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" class="form-control">
+                            <!-- <small class="text-danger" *ngIf="profileForm.errors?.misMatch">Password do not match</small> -->
+                        </div>
+                        </div>
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="house_no">House No: &nbsp;</label>
+                            <input [(ngModel)]="user.house_no" type="text" name="house_no" class="form-control"> 
+                        </div>
+                        </div>
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="area">Area &nbsp;</label>
+                            <input type="text" [(ngModel)]="user.area" name="area" class="form-control"> 
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                        <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+</div>
