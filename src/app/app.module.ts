@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ConfirmEqualValidatorDirective } from './shared/confirmEqual.directive';
 
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -32,7 +33,8 @@ import { AddUserComponent } from './components/add-user/add-user.component';
     SignUpComponent,
     DashboardComponent,
     UsersComponent,
-    AddUserComponent
+    AddUserComponent,
+    ConfirmEqualValidatorDirective
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { Router } from "@angular/router";
 export class AuthService {
 
   showError ='';
+  loggedin =false;
   user: Observable<firebase.User>;
 
   constructor(public afAuth: AngularFireAuth, public router: Router ) { 
@@ -24,7 +25,8 @@ export class AuthService {
     this.afAuth.auth.signInWithEmailAndPassword(email, password).then(
       value => {
         console.log('Done', value);
-        this.router.navigate(['dashboard']);
+        this.loggedin =true;
+        this.router.navigate(['users']);
       }
     ).catch( err => {
       this.showError = err.message;
@@ -37,7 +39,8 @@ export class AuthService {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(
       value => {
         console.log('Success', value);
-        this.router.navigate(['dashboard']);
+        
+        this.router.navigate(['sign-in']);
       }
     ).catch( err => {
       console.log('Something went Wrong: ', err.message);
@@ -46,8 +49,12 @@ export class AuthService {
 
   logout(){
     this.afAuth.auth.signOut();
+    this.loggedin =false;
     this.router.navigate(['sign-in']);
   }
 
+  getLoggedInUser(){
+    return this.afAuth.authState;
+  }
 
 }

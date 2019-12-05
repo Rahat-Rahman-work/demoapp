@@ -16,6 +16,7 @@ import { User } from '../models/user';
 export class UsersService {
 
   users: Observable<User[]>;
+  
 
   userDoc: AngularFirestoreDocument<User>;
 
@@ -27,7 +28,7 @@ export class UsersService {
   house_no: string;
   //public auth: AuthService;
 
-  constructor(public afs: AngularFirestore) { 
+  constructor(public afs: AngularFirestore, public auth: AuthService) { 
     this.usersCollection =afs.collection<User>('users');
     //this.users= this.afs.collection('users').valueChanges();
 
@@ -59,6 +60,8 @@ export class UsersService {
 
    updateUser(user: User){
     this.userDoc= this.afs.doc(`users/${user.id}`);
+    //debugger;
     this.userDoc.update(user);
    }
+   
 }

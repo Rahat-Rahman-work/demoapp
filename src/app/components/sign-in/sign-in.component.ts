@@ -11,6 +11,7 @@ export class SignInComponent implements OnInit {
   email: string;
   password: string;
   showErrors ='';
+  loggedin= false;
 
   constructor(public auth:AuthService) { }
 
@@ -19,6 +20,7 @@ export class SignInComponent implements OnInit {
 
   login(){
     this.auth.login(this.email, this.password);
+    //this.loggedin =true;
     
     this.email = this.password = ''; 
   }

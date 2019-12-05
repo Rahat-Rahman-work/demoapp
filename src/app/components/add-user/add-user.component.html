@@ -1,52 +1,76 @@
-<div class="container">
-    <div class="row">
+<div class="container"> 
+    <div class="row" [hidden]="submitted">
             <div class="col-sm-5 mx-auto mt-5 text-center">
             <div class="card bg-light"> 
                 <div class="card-header">Add-User</div>       
                 <div class="card-body">
-                    <form (ngSubmit)="onSubmit()">  <!--[formGroup]="profileForm"-->
+                    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>  <!--[formGroup]="profileForm"-->
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12"> 
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" [(ngModel)]="user.name" name="name" class="form-control">
+                            <input type="text" [(ngModel)]="user.name" name="name" class="form-control" #name="ngModel" [ngClass]="{'is-invalid':f.submitted && name.invalid}" required />
+                            <div *ngIf="name.touched && name.invalid"> <!-- name.touched  f.submitted  class="invalid-feedback"-->
+                                <div *ngIf="name.errors.required" class="text-danger">Name is required</div>
+                            </div>
                         </div>
-                        </div>
+                        </div>           
                         <div class="col-12">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="text" [(ngModel)]="user.email" name="email" class="form-control">
+                            <input type="text" [(ngModel)]="user.email" name="email" class="form-control" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}" required email />
+                            <div *ngIf="(email.touched || email.dirty) && email.invalid"> <!--  class="invalid-feedback" f.submitted -->
+                                <div *ngIf="email.errors.required" class="text-danger">Email id is required</div>
+                                <div *ngIf="email.errors.email" class="text-danger">Email must be a valid email Address</div>
+                            </div>               
                         </div>
                         </div>
                         <div class="col-12">
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input type="password" [(ngModel)]="user.password" name="password" class="form-control">
+                            <input type="password" class="form-control" [(ngModel)]="user.password" #password="ngModel" [ngClass]="{'is-invalid':f.submitted && password.invalid}" name="password" required minlength="6" />
+                            <div *ngIf="password.touched && password.invalid"> <!-- class="invalid-feedback"  f.submitted -->
+                            <div *ngIf="password.errors.required" class="text-danger">Password is required</div>
+                            <div *ngIf="password.errors.minlength" class="text-danger">Password must be at least {{password.errors.minlength.requiredLength}} characters</div>
+                            </div>
                         </div>
                        </div>
                         <div class="col-12">
                         <div class="form-group">
-                            <label for="confirmPassword">Confirm Password &nbsp;</label>
-                            <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" class="form-control">
+                            <label for="confirmPassword">Confirm Password: &nbsp;</label>
+                            <input type="password" appConfirmEqualValidator="password" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" name="confirmPassword" class="form-control" [ngClass]="{'is-invalid':f.submitted && confirmPassword.invalid}" required minlength="6">
+                            <div *ngIf="confirmPassword.touched && confirmPassword.invalid"> <!-- class="invalid-feedback"  f.submitted -->
+                                <div *ngIf="confirmPassword.errors.required" class="text-danger">Confirm Password field is required</div>
+                                <div *ngIf="confirmPassword.errors.minlength" class="text-danger">Password must be at least {{confirmPassword.errors.minlength.requiredLength}} characters</div>
+                            </div>
+                            <div *ngIf="f.submitted && confirmPassword.invalid && confirmPassword.errors.notEqual" class="text-danger invalid-feedback"> <!-- class="invalid-feedback"  f.submitted -->
+                                Password and Confirm password does not match
+                            </div>
                             <!-- <small class="text-danger" *ngIf="profileForm.errors?.misMatch">Password do not match</small> -->
                         </div>
                         </div>
                         <div class="col-12">
                         <div class="form-group">
                             <label for="house_no">House No: &nbsp;</label>
-                            <input [(ngModel)]="user.house_no" type="text" name="house_no" class="form-control"> 
+                            <input [(ngModel)]="user.house_no" type="text" name="house_no" class="form-control" #house_no="ngModel" [ngClass]="{'is-invalid':f.submitted && house_no.invalid}" required /> 
+                            <div *ngIf="house_no.touched && house_no.invalid"> <!-- class="invalid-feedback"  f.submitted -->
+                                <div *ngIf="house_no.errors.required" class="text-danger">House No. is required</div>
+                            </div>
                         </div>
                         </div>
                         <div class="col-12">
                         <div class="form-group">
                             <label for="area">Area &nbsp;</label>
-                            <input type="text" [(ngModel)]="user.area" name="area" class="form-control"> 
+                            <input type="text" [(ngModel)]="user.area" name="area" class="form-control" #area="ngModel" [ngClass]="{'is-invalid':f.submitted && area.invalid}" required>
+                            <div *ngIf="area.touched && area.invalid"> <!-- class="invalid-feedback"  f.submitted -->
+                                <div *ngIf="area.errors.required" class="text-danger">Area name is required</div>
+                            </div> 
                         </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                        <button class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button> <!-- [disabled]="!f.form.valid"-->
                         </div>
                     </div>
                 </form>

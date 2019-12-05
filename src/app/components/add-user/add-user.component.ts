@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
 import{ User } from "../../models/user";
 
 
-@Component({
+@Component({ 
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
@@ -16,6 +16,7 @@ import{ User } from "../../models/user";
 export class AddUserComponent implements OnInit {
 
   profileForm: FormGroup;
+  submitted=false;
 
   user: User = {
     name: '',
@@ -46,6 +47,8 @@ export class AddUserComponent implements OnInit {
       this.user.confirmPassword='';
       this.user.house_no='';
       this.user.area='';
+
+      this.submitted=true;
     }
   }
 
