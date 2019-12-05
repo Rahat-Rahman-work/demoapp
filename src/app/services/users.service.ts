@@ -28,6 +28,7 @@ export class UsersService {
   house_no: string;
   //public auth: AuthService;
 
+
   constructor(public afs: AngularFirestore, public auth: AuthService) { 
     this.usersCollection =afs.collection<User>('users');
     //this.users= this.afs.collection('users').valueChanges();
@@ -62,6 +63,9 @@ export class UsersService {
     this.userDoc= this.afs.doc(`users/${user.id}`);
     //debugger;
     this.userDoc.update(user);
+    
    }
+
+    
    
 }

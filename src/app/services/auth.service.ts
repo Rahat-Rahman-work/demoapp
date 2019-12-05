@@ -10,22 +10,45 @@ import { Router } from "@angular/router";
 @Injectable({ 
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService { 
 
   showError ='';
-  loggedin =false;
+  //loggedin =false;
   user: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth, public router: Router ) { 
+  
 
+  constructor(public afAuth: AngularFireAuth, public router: Router ) { 
+    // var user = firebase.auth().currentUser;
+    // var email= user.email;
+    
+    // var newPassword = getASecureRandomPassword();
+
+    // user.updatePassword(newPassword).then(function() {
+    //   // Update successful.
+    // }).catch(function(error) {
+    //   // An error happened.
+    // });
+
+    // updateEmail(email).then(value=> {
+      
+    // }).catch( err=>  {
+    //   this.showError = err.message;
+    //   console.log('Something went Wrong: ', err.message);
+    // });
   }
+
+  // update(email: string, password: string){
+
+  //   this.afAuth.auth.update
+  // }
 
   login(email: string, password: string){
     
     this.afAuth.auth.signInWithEmailAndPassword(email, password).then(
       value => {
         console.log('Done', value);
-        this.loggedin =true;
+       // this.loggedin =true;
         this.router.navigate(['users']);
       }
     ).catch( err => {
@@ -49,12 +72,14 @@ export class AuthService {
 
   logout(){
     this.afAuth.auth.signOut();
-    this.loggedin =false;
-    this.router.navigate(['sign-in']);
+    //this.loggedin =false;
+    this.router.navigate(['sign-in']); 
   }
 
   getLoggedInUser(){
     return this.afAuth.authState;
   }
+
+   
 
 }

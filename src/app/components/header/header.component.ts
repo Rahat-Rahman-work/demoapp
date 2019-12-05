@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     })
   }
   
-  loginvalue= this.auth.loggedin;
+  //loginvalue= this.auth.loggedin;
 
 
   logout(){
